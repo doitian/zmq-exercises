@@ -11,9 +11,6 @@ int main (void) {
 
   zmq_recv(receiver, NULL, 0, 0);
 
-  //  Start our clock now
-  unsigned long start_time = (unsigned long)time(NULL);
-
   //  Process 100 confirmations
   int task_nbr;
   char buff[256];
@@ -27,9 +24,6 @@ int main (void) {
     }
     fflush (stdout);
   }
-  //  Calculate and report duration of batch
-  printf("Total elapsed time: %d seconds\n",
-      (int) ((unsigned long)time(NULL) - start_time));
 
   zmq_close(receiver);
   zmq_ctx_destroy(context);

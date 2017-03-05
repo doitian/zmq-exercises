@@ -6,11 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef LINUX
-#include <unistd.h>
-#endif
 #ifdef WINDOWS
 #include <windows.h>
+#else
+#include <unistd.h>
 #endif
 
 static inline int utils_zmq_assert(int errnum) {
@@ -34,11 +33,10 @@ static inline int utils_zmq_assert_errno(int len) {
 
 static inline void utils_sleep_ms(int ms)
 {
-#ifdef LINUX
-  usleep(ms * 1000);
-#endif
 #ifdef WINDOWS
   Sleep(ms);
+#else
+  usleep(ms * 1000);
 #endif
 }
 
