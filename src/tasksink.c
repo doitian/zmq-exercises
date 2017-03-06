@@ -1,8 +1,6 @@
 #include <zmq.h>
 #include <time.h>
 
-#include "utils.h"
-
 int main (void) {
   //  Prepare our context and socket
   void *context = zmq_ctx_new();

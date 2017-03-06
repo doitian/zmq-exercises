@@ -2,15 +2,15 @@
 #include <gsl/gsl_rng.h>
 #include <time.h>
 
-#include "utils.h"
+#include "zmqex.h"
 
 int main(void) {
   void *context = zmq_ctx_new();
   void *sender = zmq_socket(context, ZMQ_PUSH);
-  utils_zmq_assert(zmq_bind(sender, "tcp://*:5557"));
+  zmqex_assert(zmq_bind(sender, "tcp://*:5557"));
 
   void *sink = zmq_socket(context, ZMQ_PUSH);
-  utils_zmq_assert(zmq_connect(sink, "tcp://localhost:5558"));
+  zmqex_assert(zmq_connect(sink, "tcp://localhost:5558"));
 
   printf("Press Enter when the workers are ready: ");
   getchar();

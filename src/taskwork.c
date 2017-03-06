@@ -3,19 +3,19 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "utils.h"
+#include "zmqex.h"
 
 int main(void) {
   void *context = zmq_ctx_new();
   void *receiver = zmq_socket(context, ZMQ_PULL);
-  utils_zmq_assert(zmq_connect(receiver, "tcp://localhost:5557"));
+  zmqex_assert(zmq_connect(receiver, "tcp://localhost:5557"));
 
   void *sender = zmq_socket(context, ZMQ_PUSH);
-  utils_zmq_assert(zmq_connect(sender, "tcp://localhost:5558"));
+  zmqex_assert(zmq_connect(sender, "tcp://localhost:5558"));
 
   char buff[256];
   while (1) {
-    int len = utils_zmq_assert_errno(
+    int len = zmqex_assert(
         zmq_recv(receiver, buff, 255, 0)
         );
     if (len > 255) {
@@ -26,7 +26,7 @@ int main(void) {
     printf("%s.", buff);
     fflush(stdout);
 
-    utils_sleep_ms(atoi(buff));
+    zmqex_sleep_ms(atoi(buff));
     zmq_send(sender, NULL, 0, 0);
   }
 
