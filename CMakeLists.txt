@@ -35,3 +35,6 @@ target_link_libraries(zmq-rtreq ${GLIB_LIBRARIES} ${GLIB_GTHREAD_LIBRARIES} zmqe
 
 add_executable(zmq-rtdealer src/rtdealer.c)
 target_link_libraries(zmq-rtdealer ${GLIB_LIBRARIES} ${GLIB_GTHREAD_LIBRARIES} zmqex)
+
+add_executable(zmq-lbbroker src/lbbroker.c)
+target_link_libraries(zmq-lbbroker ${GLIB_LIBRARIES} ${GLIB_GTHREAD_LIBRARIES} zmqex)
