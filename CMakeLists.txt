@@ -32,3 +32,6 @@ target_link_libraries(zmq-router zmqex)
 
 add_executable(zmq-rtreq src/rtreq.c)
 target_link_libraries(zmq-rtreq ${GLIB_LIBRARIES} ${GLIB_GTHREAD_LIBRARIES} zmqex)
+
+add_executable(zmq-rtdealer src/rtdealer.c)
+target_link_libraries(zmq-rtdealer ${GLIB_LIBRARIES} ${GLIB_GTHREAD_LIBRARIES} zmqex)
