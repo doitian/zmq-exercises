@@ -12,7 +12,9 @@ link_libraries(${ZMQ_LIBRARIES})
 add_library(zmqex STATIC EXCLUDE_FROM_ALL src/zmqex.c)
 
 add_executable(zmq-helloserver src/helloserver.c)
+target_link_libraries(zmq-helloserver ${GLIB_LIBRARIES})
 add_executable(zmq-helloclient src/helloclient.c)
+
 add_executable(zmq-version src/version.c)
 
 add_executable(zmq-wuserver src/wuserver.c)
@@ -22,7 +24,7 @@ add_executable(zmq-wuclient src/wuclient.c)
 add_executable(zmq-taskvent src/taskvent.c)
 target_link_libraries(zmq-taskvent ${GLIB_LIBRARIES} zmqex)
 add_executable(zmq-taskwork src/taskwork.c)
-target_link_libraries(zmq-taskwork zmqex)
+target_link_libraries(zmq-taskwork ${GLIB_LIBRARIES} zmqex)
 add_executable(zmq-tasksink src/tasksink.c)
 
 add_executable(zmq-router src/router.c)

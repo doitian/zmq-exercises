@@ -5,12 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef WINDOWS
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
-
 int zmqex_assert(int retcode) {
   if (retcode == -1) {
     int err = zmq_errno();
@@ -19,14 +13,6 @@ int zmqex_assert(int retcode) {
   }
 
   return retcode;
-}
-
-void zmqex_sleep_ms(int ms) {
-#ifdef WINDOWS
-  Sleep(ms);
-#else
-  usleep(ms * 1000);
-#endif
 }
 
 int zmqex_dump(void *socket) {

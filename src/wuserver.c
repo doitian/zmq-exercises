@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <zmq.h>
-#include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <glib.h>
@@ -11,7 +10,7 @@ int main(void) {
   int rc = zmq_bind(publisher, "tcp://*:5556");
   assert(rc == 0);
 
-  GRand *r = g_rand_new_with_seed((guint32)time(NULL));
+  GRand *r = g_rand_new_with_seed((guint32)g_get_real_time());
 
   while (1) {
     //  Get values that will fool the boss

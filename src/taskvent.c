@@ -18,7 +18,7 @@ int main(void) {
 
   zmq_send(sink, "0", 1, 0);
 
-  GRand *r = g_rand_new_with_seed((guint32)time(NULL));
+  GRand *r = g_rand_new_with_seed((guint32)g_get_real_time());
 
   int task_nbr = 0;
   int total_msec = 0;

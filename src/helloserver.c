@@ -1,8 +1,8 @@
 #include <zmq.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
 #include <assert.h>
+#include <glib.h>
 
 int main (void) {
   //  Socket to talk to clients
@@ -15,7 +15,8 @@ int main (void) {
     char buffer[10];
     zmq_recv(responder, buffer, 10, 0);
     printf("Received Hello\n");
-    sleep(1);  //  Do some 'work'
+
+    g_usleep(G_USEC_PER_SEC);
     zmq_send(responder, "World", 5, 0);
   }
   return 0;

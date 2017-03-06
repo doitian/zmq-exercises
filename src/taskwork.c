@@ -1,7 +1,7 @@
 #include <zmq.h>
-#include <gsl/gsl_rng.h>
 #include <time.h>
 #include <stdlib.h>
+#include <glib.h>
 
 #include "zmqex.h"
 
@@ -26,7 +26,7 @@ int main(void) {
     printf("%s.", buff);
     fflush(stdout);
 
-    zmqex_sleep_ms(atoi(buff));
+    g_usleep(atoi(buff) * 1000);
     zmq_send(sender, NULL, 0, 0);
   }
 
