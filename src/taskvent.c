@@ -1,6 +1,6 @@
 #include <zmq.h>
-#include <gsl/gsl_rng.h>
 #include <time.h>
+#include <glib.h>
 
 #include "zmqex.h"
 
@@ -18,21 +18,20 @@ int main(void) {
 
   zmq_send(sink, "0", 1, 0);
 
-  gsl_rng *r = gsl_rng_alloc(gsl_rng_mt19937);
-  gsl_rng_set(r, (unsigned long)time(NULL));
+  GRand *r = g_rand_new_with_seed((guint32)time(NULL));
 
   int task_nbr = 0;
   int total_msec = 0;
   char buff[10];
 
   for (task_nbr = 0; task_nbr < 100; task_nbr++) {
-    int workload = (int)(gsl_rng_uniform_int(r, 100) + 1);
+    int32_t workload = g_rand_int_range(r, 1, 101);
     total_msec += workload;
-    int len = sprintf(buff, "%d", workload);
+    int32_t len = sprintf(buff, "%d", workload);
     zmq_send(sender, buff, len, 0);
   }
 
-  gsl_rng_free(r);
+  g_rand_free(r);
 
   zmq_close(sender);
   zmq_close(sink);
