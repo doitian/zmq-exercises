@@ -4,7 +4,7 @@ project(zmq-exersices C)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
 find_package(ZMQ 4.0 REQUIRED)
-find_package(GLIB 2.50 REQUIRED)
+find_package(GLIB 2.50 REQUIRED COMPONENTS gthread)
 
 include_directories(${ZMQ_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/src)
 link_libraries(${ZMQ_LIBRARIES})
@@ -29,3 +29,6 @@ add_executable(zmq-tasksink src/tasksink.c)
 
 add_executable(zmq-router src/router.c)
 target_link_libraries(zmq-router zmqex)
+
+add_executable(zmq-rtreq src/rtreq.c)
+target_link_libraries(zmq-rtreq ${GLIB_LIBRARIES} ${GLIB_GTHREAD_LIBRARIES} zmqex)

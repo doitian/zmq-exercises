@@ -15,6 +15,18 @@ int zmqex_assert(int retcode) {
   return retcode;
 }
 
+
+void * zmqex_assert_ptr(void *ptr) {
+  if (ptr == NULL) {
+    int err = zmq_errno();
+    fprintf(stderr, "zmq: %s\n", zmq_strerror(err));
+    exit(err);
+  }
+
+  return ptr;
+}
+
+
 int zmqex_dump(void *socket) {
   int rc;
   int more = 0;
